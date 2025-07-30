@@ -1,4 +1,6 @@
 class Checkers:
+
+
     def __init__(self, n):
         self.grid = [["#"] * n for _ in range(n)]
         self.n = n
@@ -17,8 +19,6 @@ class Checkers:
                     self.grid[i][j] = "B"
                 else:
                     continue
-
-
 
 
     def in_bounds(self, x, y):
@@ -48,17 +48,14 @@ class Checkers:
         end_x, end_y = end
         diff_x, diff_y = end_x - start_x, end_y - start_y
 
-
        # check if it is inside the bounds
         if not self.in_bounds(end_x, end_y):
             return False
         if self.grid[start_x][start_y] != current_player:
             return False
 
-
         if not self.is_empty_cell(end_x, end_y):
             return False
-
 
        # check if the cell is empty, then if the difference is one then it is a normal move, check if it is (1, 1), (-1, -1), (-1, 1), (1, -1)
         if abs(diff_x) == 1 and self.is_one_move(diff_x, diff_y):
@@ -67,12 +64,10 @@ class Checkers:
                 self.grid[end_x][end_y] = current_player
                 return True
 
-
        # check if the cell on in the way is not empty and check if it is a valid move
         if abs(diff_x) == 2 and self.is_one_move(diff_x//2, diff_y//2):
             mid_x, mid_y = start_x + diff_x // 2, start_y + diff_y // 2
             mid_piece = self.grid[mid_x][mid_y]
-
 
             if mid_piece != "#" and mid_piece.upper() != current_player:
                 self.grid[start_x][start_y] = "#"
@@ -80,13 +75,11 @@ class Checkers:
                 self.grid[end_x][end_y] = current_player
                 return True
 
-
         return False
 
 
     def check_winner(self):
         blue, red = 0, 0
-
 
         for i in range(len(self.grid)):
             for j in range(len(self.grid[0])):
@@ -111,21 +104,16 @@ class Checkers:
                 print("Blue Won!")
                 break
 
-
-
-
             start_x = int(input("Enter the piece you wanna move from (row): "))
             start_y = int(input("Enter the piece you wanna move from (column): "))
             end_x = int(input("Enter the piece you wanna move to (row): "))
             end_y = int(input("Enter the piece you wanna move to (column): "))
-
 
             if self.is_valid_move( (start_x, start_y), (end_x, end_y), current_player):
                 current_player = "B" if current_player == "R" else "R"
                 print(f"Good move, now {current_player}'s turn")
             else:
                 print("Sorry, invalid move")
-
 
 
 
